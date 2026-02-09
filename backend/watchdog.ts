@@ -7,9 +7,6 @@ if (!process.env.CODEX_SESSION_PATH){
 const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 const codexSessionPath = process.env.CODEX_SESSION_PATH || "";
 console.log("Watching:", codexSessionPath);
-const now = new Date();
-const currentDir = codexSessionPath + "/" + now.getFullYear() + "/" + (now.getMonth() + 1).toString().padStart(2, '0') + "/" + now.getDate().toString().padStart(2, '0');
-console.log("Watching directory:", currentDir);
 console.log("On port:", port);
 let lastText = "";
 
@@ -24,7 +21,9 @@ function sendAction(action: string) {
 }
 
 let lastSentAction = "";
-chokidar.watch(codexSessionPath, { ignoreInitial: true }).on("change", async (path, stats) => {
+const watcher = chokidar.watch(codexSessionPath, { ignoreInitial: true })
+
+watcher.on("change", async (path, stats) => {
     if (!path.endsWith(".jsonl")) {
         return;
     }
