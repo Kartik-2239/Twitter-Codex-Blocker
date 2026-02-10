@@ -35,7 +35,7 @@ Blocks distracting sites (twitter.com, x.com) when Codex isn't actively working.
 
 ## Requirements
 
-- [Bun](https://bun.sh)
+- [Bun](https://bun.com)
 - Google Chrome
 
 ## Setup
